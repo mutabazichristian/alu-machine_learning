@@ -11,5 +11,6 @@ plt.plot(x, y, color='red')
 plt.xlabel('X-axis')
 plt.ylabel('Y-axis')
 plt.title('Graph')
+plt.xlim(left=0, right=10)
 
 plt.show()
