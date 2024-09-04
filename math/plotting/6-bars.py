@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 np.random.seed(5)
 fruit = np.random.randint(0, 20, (4, 3))
 colors = {'Apples': 'red', 'Bananas': 'yellow',
-        'Oranges': '#ff8000', 'Peaches': '#ffe5b4'}
+          'Oranges': '#ff8000', 'Peaches': '#ffe5b4'}
 people = ['Farrah', 'Fred', 'Felicia']
 width = 0.5
 
@@ -20,7 +20,7 @@ fruit_types = ['Apples', 'Bananas', 'Oranges', 'Peaches']
 
 for i, fruit_type in enumerate(fruit_types):
     ax.bar(x, fruit[i], width, color=colors[fruit_type],
-        label=fruit_type, bottom=bottoms)
+           label=fruit_type, bottom=bottoms)
     bottoms += fruit[i]  # Update the bottom position for the next stack
 
 # Set the title, labels, and legend
