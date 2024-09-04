@@ -1,7 +1,15 @@
-#!/usr/bin/env python3
+#!usr/bin/env python3
 import numpy as np
 import matplotlib.pyplot as plt
 
-y = np.arange(0,11) ** 3
+y = np.arange(0, 11) ** 3
+x = np.arange(0, 11)
 
-print(y)
+plt.plot(x, y, marker='.')
+
+# Some modifications
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('Graph')
+
+plt.show()
