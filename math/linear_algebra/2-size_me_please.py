@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-import numpy as np
-
-
 def matrix_shape(matrix):
-    shape = np.array(matrix)
-    return shape.shape
+    shape = []
+    while isinstance(matrix,list):
+        shape.append((len(matrix)))
+        matrix = matrix[0]
+
+    return shape
 
 mat1 = [[1,2],[3,4]]
 print(matrix_shape(mat1))
