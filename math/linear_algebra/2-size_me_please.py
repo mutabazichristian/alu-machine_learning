@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 def matrix_shape(matrix):
     shape = []
-    while isinstance(matrix,list):
+    while isinstance(matrix, list):
         shape.append((len(matrix)))
         matrix = matrix[0]
 
     return shape
 
-mat1 = [[1,2],[3,4]]
+
+mat1 = [[1, 2], [3, 4]]
 print(matrix_shape(mat1))
 mat2 = [
     [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15]],
