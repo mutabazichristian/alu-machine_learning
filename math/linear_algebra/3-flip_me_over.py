@@ -7,4 +7,12 @@ def matrix_transpose(matrix):
     Arguements: A matrix
     Returns: A transpose of that matrix
     """
-    return [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
+    transpose = []
+    rows = len(matrix)
+    cols = len(matrix[0])
+    # iterate through the rows
+    for i in range(rows):
+        # iterate through the columns
+        for j in range(cols):
+            transpose.append(matrix[j][i])
+    return transpose
