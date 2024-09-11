@@ -3,4 +3,8 @@
 
 
 def matrix_transpose(matrix):
+    """
+    Arguements: A matrix
+    Returns: A transpose of that matrix
+    """
     return [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
