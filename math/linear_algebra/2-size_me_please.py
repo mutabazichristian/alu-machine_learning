@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Mode contains method determine the shape of a given matrix  """
 
+
 def matrix_shape(matrix):
     """Function that return the shape of matrix, all dimensions"""
     shape = []
