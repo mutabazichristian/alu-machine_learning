@@ -3,10 +3,7 @@
 
 
 def matrix_transpose(matrix):
-    print("tryna find a matrix transpose huh?")
-    print(matrix)
+    for i in range(len(matrix)):
+        print("hi")
+    return [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
 
-
-mat1 = [[1, 2], [3, 4]]
-print(mat1)
-print(matrix_transpose(mat1))
