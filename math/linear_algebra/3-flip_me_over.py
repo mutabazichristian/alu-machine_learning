@@ -12,7 +12,9 @@ def matrix_transpose(matrix):
     cols = len(matrix[0])
     # iterate through the rows
     for i in range(rows):
+        row = []
         # iterate through the columns
         for j in range(cols):
-            transpose.append(matrix[j][i])
+            row.append(matrix[j][i])
+        transpose.append(row)
     return transpose
