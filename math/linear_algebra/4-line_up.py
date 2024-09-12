@@ -13,6 +13,3 @@ def add_arrays(arr1, arr2):
     for i in range(len(arr2)):
         arr_sum.append(arr1[i] + arr2[i])
     return arr_sum
-
-
-print(add_arrays([1, 2, 3, 4, 5], [1, 2, 3, 4, 5]))
