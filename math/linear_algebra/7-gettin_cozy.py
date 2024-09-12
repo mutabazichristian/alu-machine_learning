@@ -16,8 +16,12 @@ def cat_matrices2D(mat1, mat2, axis=0):
         # check if mat 1 and 2 are the same shape
         if len(mat1) != len(mat2):
             return None
-        for i in range(mat2):
+        for i in range(len(mat2)):
             mat1[i].append(mat2[i])
+        concat_mat = mat1
         return concat_mat
     else:
         return None
+
+
+print(cat_matrices2D([1, 2, 3], [1, 2]))
