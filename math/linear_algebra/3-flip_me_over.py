@@ -3,6 +3,10 @@
 
 
 def matrix_transpose(matrix):
+    """
+    Arg: matrix
+    returns: the transpose of matrix
+    """
     transpose = []
     # loop through the colums
     for j in range(len(matrix[0])):
