@@ -11,7 +11,7 @@ def add_arrays(arr1, arr2):
         return None
     arr_sum = []
     for i in range(len(arr2)):
-        arr_sum = arr1[i] + arr2[i]
+        arr_sum.append(arr1[i] + arr2[i])
     return arr_sum
 
 
