@@ -8,7 +8,9 @@ def add_matrices2D(mat1, mat2):
     returns: the addition matrix of the 2 matrices
     """
     sum_mat = []
-    if (len(mat1) != len(mat2)) or (len(mat1[0]) != len(mat2)):
+    if len(mat2) == 0 and len(mat1) == 0:
+        return []
+    if (len(mat1) != len(mat2)) or (len(mat1[0]) != len(mat2[0])):
         return None
     # loop through row
     for i in range(len(mat2)):
@@ -19,4 +21,4 @@ def add_matrices2D(mat1, mat2):
     return sum_mat
 
 
-print(add_matrices2D([[1, 2], [3, 4]], [[1, 2], [3, 4]]))
+print(add_matrices2D([[1, 2]], [[1, 2], [1, 2]]))
