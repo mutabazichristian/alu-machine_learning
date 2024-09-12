@@ -19,6 +19,3 @@ def add_matrices2D(mat1, mat2):
             row.append(mat1[i][j] + mat2[i][j])
         sum_mat.append(row)
     return sum_mat
-
-
-print(add_matrices2D([[1, 2]], [[1, 2], [1, 2]]))
