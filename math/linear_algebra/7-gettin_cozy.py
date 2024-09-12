@@ -22,6 +22,3 @@ def cat_matrices2D(mat1, mat2, axis=0):
         return concat_mat
     else:
         return None
-
-
-print(cat_matrices2D([1, 2, 3], [1, 2]))
