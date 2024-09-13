@@ -1,5 +1,5 @@
-#!/usr/bin/bash python3
-""" PLACE HOLDER """
+#!/usr/bin/env python3
+""" Professional slicing """
 import numpy as np
 
 matrix = np.array(
