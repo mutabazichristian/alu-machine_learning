@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Function to do this lol"""
 def add_matrices(mat1, mat2):
     """
     Adds two matrices of the same shape.
@@ -21,6 +22,9 @@ def add_matrices(mat1, mat2):
         return not isinstance(m1, list) and not isinstance(m2, list)
 
     def add_recursive(m1, m2):
+        """
+        arguments and returns brotheraaa
+        """
         if not isinstance(m1, list):
             return m1 + m2
         return [add_recursive(e1, e2) for e1, e2 in zip(m1, m2)]
