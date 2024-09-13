@@ -9,7 +9,7 @@ def np_slice(matrix, axes={}):
     Returns:
     A sliced numpy array
     """
-    sliced_objects = [slice(None)] * matrix.dim
+    sliced_objects = [slice(None)] * matrix.shape
 
     for axis, slice_tuple in axes.items():
         sliced_objects[axis] = slice(*slice_tuple)
