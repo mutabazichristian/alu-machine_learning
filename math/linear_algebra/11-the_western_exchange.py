@@ -10,4 +10,4 @@ def np_transpose(matrix):
     Returns:
     A new array, transpose of the given matrix
     """
-    return matrix.transpose
+    return matrix.transpose()
