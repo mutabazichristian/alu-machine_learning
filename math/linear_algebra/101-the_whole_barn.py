@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 def add_matrices(mat1, mat2):
     """
     Adds two matrices of the same shape.
