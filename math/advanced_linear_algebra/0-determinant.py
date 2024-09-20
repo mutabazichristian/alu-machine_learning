@@ -12,7 +12,7 @@ def determinant(matrix):
     """
     # Check if the input is a list of lists (matrix)
     if not (isinstance(matrix, list) and all(isinstance(row, list) for row in matrix)):
-        raise TypeError("matrix should be a list of lists")
+        raise TypeError("matrix must be a list of lists")
 
     # Check for empty matrix or inconsistent row lengths
     if len(matrix) == 0 or any(len(row) != len(matrix[0]) for row in matrix):
