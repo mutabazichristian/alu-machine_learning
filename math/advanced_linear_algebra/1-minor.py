@@ -12,11 +12,14 @@ def minor(matrix):
     if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
         raise TypeError("matrix must be a list of lists")
     
-    # Check if matrix is non-empty and square
-    if not matrix or len(matrix) != len(matrix[0]):
+    # Check if matrix is empty
+    if not matrix:
         raise ValueError("matrix must be a non-empty square matrix")
     
+    # Check if all rows have the same length and if matrix is square
     n = len(matrix)
+    if any(len(row) != n for row in matrix):
+        raise ValueError("matrix must be a non-empty square matrix")
     
     # Special case for 1x1 matrix
     if n == 1:
