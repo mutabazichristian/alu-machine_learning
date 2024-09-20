@@ -51,7 +51,3 @@ def cofactor(matrix):
     
     return cofactor_matrix
 
-
-if __name__ == "__main__":
-    # You can add test cases here if needed
-    pass   pass
