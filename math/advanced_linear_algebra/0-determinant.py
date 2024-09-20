@@ -11,8 +11,11 @@ def determinant(matrix):
     The determinant of the matrix or raises an error for invalid input
     """
     # Check if the input is a list of lists (matrix)
-    if not (isinstance(matrix, list) and all(isinstance(row, list) for row in matrix)):
-        raise TypeError("matrix should be a list of lists")
+    if not (
+        isinstance(matrix, list) and all(isinstance(row, list)
+                                         for row in matrix)
+    ):
+        raise TypeError("matrix must be a list of lists")
 
     # Check if the matrix is empty
     if matrix == [[]]:  # Handle empty matrix [[]] as a special case
@@ -43,4 +46,4 @@ def determinant(matrix):
 
 def minor(matrix, i, j):
     """Returns the minor of the matrix by removing the ith row and jth column."""
-    return [row[:j] + row[j + 1 :] for row in (matrix[:i] + matrix[i + 1 :])]
+    return [row[:j] + row[j + 1:] for row in (matrix[:i] + matrix[i + 1:])]

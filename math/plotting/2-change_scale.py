@@ -9,11 +9,11 @@ y = np.exp((r / t) * x)
 
 plt.plot(x, y)
 
-plt.title('Exponential Decay of C-14')
-plt.xlabel('Time (years)')
-plt.ylabel('Fraction Remaining')
+plt.title("Exponential Decay of C-14")
+plt.xlabel("Time (years)")
+plt.ylabel("Fraction Remaining")
 
 plt.xlim(left=0, right=28650)
-plt.yscale('log')
+plt.yscale("log")
 
 plt.show()

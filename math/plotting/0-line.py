@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 y = np.arange(0, 11) ** 3
 x = np.arange(0, 11)
 
-plt.plot(x, y, color='red')
+plt.plot(x, y, color="red")
 
 # Some modifications
-plt.xlabel('X-axis')
-plt.ylabel('Y-axis')
-plt.title('Graph')
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.title("Graph")
 plt.xlim(left=0, right=10)
 
 plt.show()
