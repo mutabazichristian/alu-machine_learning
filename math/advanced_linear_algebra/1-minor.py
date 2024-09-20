@@ -9,26 +9,26 @@ def minor(matrix):
     Returns:
     A matrix of minors or raises an error for invalid input
     """
-
-    # Check if the matrix is empty
-    if not matrix or matrix == [[]]:  # Handle empty matrix [[]] as a special case
-        return 1
-
-    # Check if the matrix is square
-    if len(matrix) != len(matrix[0]):
+    if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
+        raise ValueError("matrix must be a list of lists")
+    if not matrix or any(len(row) == 0 for row in matrix):
+        raise ValueError("matrix must be a non-empty square matrix")
+    n = len(matrix)
+    if any(len(row) != n for row in matrix):
         raise ValueError("matrix must be a square matrix")
-
-    # Handle 1x1 matrix case
-    if len(matrix) == 1:
-        return [[1]]  # The minor of a 1x1 matrix is usually defined as 1
+    if n == 1:
+        return [[1]]
 
     minors = []
-    for i in range(len(matrix)):
+    for i in range(n):
         minor_row = []
-        for j in range(len(matrix)):
-            # Create minor by removing row i and column j
+        for j in range(n):
             minor_matrix = [row[:j] + row[j + 1:] for row in (matrix[:i] + matrix[i + 1:])]
             minor_row.append(minor_matrix)
         minors.append(minor_row)
 
     return minors
+
+# Example usage:
+# matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+# print(minor(matrix))
