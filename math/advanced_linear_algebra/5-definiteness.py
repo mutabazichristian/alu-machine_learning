@@ -23,6 +23,10 @@ def definiteness(matrix):
     if len(matrix.shape) != 2 or matrix.shape[0] != matrix.shape[1]:
         return None
 
+    # Check if the matrix is symmetric
+    if not np.allclose(matrix, matrix.T):
+        return None
+
     try:
         eigvals = np.linalg.eigvals(matrix)
     except np.linalg.LinAlgError:
@@ -30,7 +34,7 @@ def definiteness(matrix):
 
     positive = np.all(eigvals > 0)
     negative = np.all(eigvals < 0)
-    zero = np.any(eigvals == 0)
+    zero = np.any(np.isclose(eigvals, 0))
 
     if positive:
         return "Positive definite"
@@ -45,3 +49,7 @@ def definiteness(matrix):
     else:
         return None
 
+
+if __name__ == "__main__":
+    # You can add test cases here if needed
+    pass
