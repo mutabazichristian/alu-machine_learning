@@ -12,16 +12,22 @@ def determinant(matrix):
     """
     # Check if the input is a list of lists (matrix)
     if not (isinstance(matrix, list) and all(isinstance(row, list) for row in matrix)):
-        raise TypeError("matrix must be a list of lists")
+        raise TypeError("matrix should be a list of lists")
 
-    # Check for empty matrix or inconsistent row lengths
-    if len(matrix) == 0 or any(len(row) != len(matrix[0]) for row in matrix):
+    # Check if the matrix is empty
+    if matrix == [[]]:  # Handle empty matrix [[]] as a special case
+        return 1
+
+    # Check if the matrix is square
+    if len(matrix) != len(matrix[0]):
         raise ValueError("matrix must be a square matrix")
 
-    # Handle special cases
-    if len(matrix) == 1:  # 1x1 matrix
+    # Handle 1x1 matrix case
+    if len(matrix) == 1:
         return matrix[0][0]
-    if len(matrix) == 2:  # 2x2 matrix
+
+    # Handle 2x2 matrix case
+    if len(matrix) == 2:
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
 
     # Recursive case for larger matrices
@@ -37,5 +43,4 @@ def determinant(matrix):
 
 def minor(matrix, i, j):
     """Returns the minor of the matrix by removing the ith row and jth column."""
-    # Ensure that the minor matrix is properly constructed by skipping the ith row and jth column
     return [row[:j] + row[j + 1 :] for row in (matrix[:i] + matrix[i + 1 :])]
