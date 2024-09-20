@@ -45,5 +45,7 @@ def determinant(matrix):
 
 
 def minor(matrix, i, j):
-    """Returns the minor of the matrix by removing the ith row and jth column."""
+    """
+    Returns the minor of the matrix by removing the ith row and jth column.
+    """
     return [row[:j] + row[j + 1:] for row in (matrix[:i] + matrix[i + 1:])]
