@@ -17,8 +17,8 @@ def determinant(matrix):
         return "matrix should be a list"
     if matrix == [[]]:
         return 1
-    if len(matrix) != len(matrix[0]):
-        return "matrix should be a square matrix"
+    if len(matrix) == 0 or any(len(row) != len(matrix[0]) for row in matrix):
+        raise ValueError("matrix must be a square matrix")
     if len(matrix) == 1:
         return matrix[0][0]
 
