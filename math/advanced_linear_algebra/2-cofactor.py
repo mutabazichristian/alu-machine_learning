@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ Function that calculates the cofactor of a matrix"""
-import numpy as np
+
 
 def determinant(matrix):
     """
