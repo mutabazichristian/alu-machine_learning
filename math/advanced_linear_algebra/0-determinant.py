@@ -15,6 +15,8 @@ def determinant(matrix):
             return "matrix should be a list"
     except Exception as e:
         return "matrix should be a list"
+    if matrix == [[]]:
+        return 1
     if len(matrix) != len(matrix[0]):
         return "matrix should be a square matrix"
     if len(matrix) == 1:
