@@ -16,6 +16,6 @@ def poly_integral(poly, C=0):
     if not isinstance(poly, list) or len(poly) == 0:
         return None
     integral = [C]
-    for i in range(1, len(poly)):
-        integral.append(poly[i] / i)
+    for i in range(len(poly)):
+        integral.append(poly[i] / (i + 1))
     return integral
