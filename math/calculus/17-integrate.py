@@ -19,3 +19,6 @@ def poly_integral(poly, C=0):
     for i in range(len(poly)):
         integral.append(poly[i] / (i + 1))
     return integral
+
+
+print(poly_integral([0], 5))
