@@ -13,12 +13,27 @@ def poly_integral(poly, C=0):
     Returns:
     A list of the integral's polynomial, reverse order
     """
+    # Validate input
     if not isinstance(poly, list) or len(poly) == 0:
         return None
+    if not isinstance(C, (int, float)):
+        return None
+
+    # Start the integral with the constant C
     integral = [C]
+
+    # Calculate the integral coefficients
     for i in range(len(poly)):
         integral.append(poly[i] / (i + 1))
+
+    # Convert whole numbers to int if needed
+    integral = [
+        int(coef) if isinstance(coef, float) and coef.is_integer() else coef
+        for coef in integral
+    ]
+
     return integral
 
 
-print(poly_integral([0], 5))
+# Example usage
+print(poly_integral([5, 3, 0, 1], 5))  # Expected output: [5, 5, 1.5, 0, 0.25]
