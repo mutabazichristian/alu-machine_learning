@@ -12,7 +12,7 @@ def poly_derivative(poly):
     Returns:
 
     """
-    if not isinstance(poly, list):
+    if (not isinstance(poly, list)) or len(poly) == 0:
         return None
     if len(poly) == 1:
         return [0]
