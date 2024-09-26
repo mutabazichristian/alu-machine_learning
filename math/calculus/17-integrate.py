@@ -27,7 +27,11 @@ def poly_integral(poly, C=0):
         int(coef) if isinstance(coef, float) and coef.is_integer() else coef
         for coef in integral
     ]
-    while len(integral) > 1 and integral[0] == 0:
+    if (
+        len(integral) > 1
+        and integral[0] == 0
+        and all(coef == 0 for coef in integral[1:])
+    ):
         integral.pop(0)
 
     return integral
