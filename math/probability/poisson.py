@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import math
 """
 Task 0:
 Create a class Poisson
@@ -24,11 +23,15 @@ class Poisson:
                 raise ValueError("data must contain multiple values")
 
             self.lambtha = float(sum(data) / len(data))
+            self.data = data
 
     def pmf(self, k):
+        data = self.data
         if not isinstance(k, int):
             k = int(k)
-        if k > len(data):
+        if k > len(self.data):
             return 0
         lambtha = self.lambtha
-        pmf = (lambtha ** k) * math.exp(-lambtha)/math.factorial(k)
+        # pmf = (lambtha*k)*()
+        pmf = 1
+        return pmf
