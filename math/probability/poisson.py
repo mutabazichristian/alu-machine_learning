@@ -33,7 +33,7 @@ class Poisson:
 
         result = 1.0
         term = 1.0
-        for i in range(1, 50):
+        for i in range(1, 51):
             term *= x / i
             result += term
 
