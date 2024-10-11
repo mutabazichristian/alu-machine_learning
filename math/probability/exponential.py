@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+yessir 
+acusbd
+"""
 
 
 class Exponential:
@@ -46,7 +50,7 @@ class Exponential:
         Calculate the Cumulative Distribution Function (CDF) for a given x.
 
         Args:
-            x 
+            x
 
         Returns:
             float
