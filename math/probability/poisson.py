@@ -25,9 +25,7 @@ class Poisson:
 
             self.lambtha = sum(data) / len(data)
             self.data = data
-            self.e =2.7182818285
-
-    
+            self.e = 2.7182818285
 
     def factorial(self, n):
         if n == 0 or n == 1:
@@ -43,7 +41,6 @@ class Poisson:
         Arguments:
         k
         """
-        data = self.data
         if not isinstance(k, int):
             k = int(k)
         if k < 0:
