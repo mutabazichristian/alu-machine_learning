@@ -56,10 +56,11 @@ class Poisson:
         data = self.data
         if not isinstance(k, int):
             k = int(k)
-        if k > len(self.data):
+        if k < 0:
             return 0
         lambtha = self.lambtha
-        ex = self.exp(-lambtha)
-        k_fac = self.factorial(k)
-        pmf = (lambtha**k) * ex / k_fac
-        return pmf
+        factorial_k = self.factorial(k)
+        exp_neg_lambda = self.exp(-lambtha)
+        pmf_value = (lambtha**k) * exp_neg_lambda / factorial_k
+
+        return round(pmf_value, 10)
