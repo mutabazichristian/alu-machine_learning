@@ -8,7 +8,8 @@ Create a class Poisson
 class Poisson:
     """
     Attributes:
-
+    Data
+    Lambtha
     """
 
     def __init__(self, data=None, lambtha=1):
@@ -25,13 +26,40 @@ class Poisson:
             self.lambtha = float(sum(data) / len(data))
             self.data = data
 
+    def exp(self, x):
+        """
+        Calculates the exponent of x using expansion
+        """
+
+        result = 1.0
+        term = 1.0
+        for i in range(1, 50):
+            term *= x / i
+            result += term
+
+        return result
+
+    def factorial(self, n):
+        if n == 0 or n == 1:
+            return 1
+        result = 1
+        for i in range(2, n + 1):
+            result *= i
+        return result
+
     def pmf(self, k):
+        """
+        Function that returns the pmf of a given
+        Arguments:
+        k
+        """
         data = self.data
         if not isinstance(k, int):
             k = int(k)
         if k > len(self.data):
             return 0
         lambtha = self.lambtha
-        # pmf = (lambtha*k)*()
-        pmf = 1
+        ex = self.exp(-lambtha)
+        k_fac = self.factorial(k)
+        pmf = (lambtha**k) * ex / k_fac
         return pmf
