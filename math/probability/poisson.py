@@ -1,53 +1,44 @@
 #!/usr/bin/env python3
 """
-Task 0:
-Create a class Poisson
+A Class Poisson for the possion districution
+
 """
 
 
 class Poisson:
     """
-    Attributes:
-    Data
-    Lambtha
+    YOu know a bunch of attributes that will one day makes sense
     """
 
     def __init__(self, data=None, lambtha=1.0):
         if data is None:
             if lambtha <= 0:
                 raise ValueError("lambtha must be a positive value")
-            self.lambtha = lambtha
+            self.lambtha = float(lambtha)
         else:
             if not isinstance(data, list):
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
-
-            self.lambtha = sum(data) / len(data)
-            self.data = data
-            self.e = 2.7182818285
-
-    def factorial(self, n):
-        if n == 0 or n == 1:
-            return 1
-        result = 1
-        for i in range(2, n + 1):
-            result *= i
-        return result
+            self.lambtha = float(sum(data) / len(data))
 
     def pmf(self, k):
         """
-        Function that returns the pmf of a given
-        Arguments:
-        k
+        Calculates the value of the PMF for a given number of "successes"
+
+        Args:
+        k (int): number of "successes"
+
+        Returns:
+        float: PMF value for k
         """
-        if not isinstance(k, int):
-            k = int(k)
+        k = int(k)
         if k < 0:
             return 0
-        lambtha = self.lambtha
-        factorial_k = self.factorial(k)
-        exp_neg_lambda = self.e
-        pmf_value = (lambtha**k) * exp_neg_lambda / factorial_k
 
-        return round(pmf_value, 10)
+        e = 2.7182818285  # Approximation of e
+        factorial_k = 1
+        for i in range(1, k + 1):
+            factorial_k *= i
+
+        return (e**-self.lambtha) * (self.lambtha**k) / factorial_k
