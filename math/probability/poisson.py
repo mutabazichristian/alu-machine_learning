@@ -25,23 +25,9 @@ class Poisson:
 
             self.lambtha = sum(data) / len(data)
             self.data = data
+            self.e =2.7182818285
 
-    def exp(self, x):
-        """
-        Calculates the exponent of x using expansion
-        """
-
-        result = 1.0
-        term = 1.0
-        i = 1
-        threshold = 1e-15
-
-        while term > threshold:
-            term *= x / i
-            result += term
-            i += 1
-
-        return result
+    
 
     def factorial(self, n):
         if n == 0 or n == 1:
@@ -64,7 +50,7 @@ class Poisson:
             return 0
         lambtha = self.lambtha
         factorial_k = self.factorial(k)
-        exp_neg_lambda = self.exp(-lambtha)
+        exp_neg_lambda = self.e
         pmf_value = (lambtha**k) * exp_neg_lambda / factorial_k
 
         return round(pmf_value, 10)
