@@ -3,6 +3,7 @@
 cnaiurwedsncj
 """
 
+
 class Normal:
     """
     A class that represents a normal distribution.
