@@ -62,4 +62,3 @@ class Poisson:
             cdf_value += self.pmf(i)
 
         return cdf_value
-
