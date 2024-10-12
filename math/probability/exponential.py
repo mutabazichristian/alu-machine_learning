@@ -14,7 +14,6 @@ class Exponential:
     def __init__(self, data=None, lambtha=1.0):
         """
         Initialize the Exponential distribution.
-
         Args:
             data
             lambtha
