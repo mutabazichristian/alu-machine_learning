@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
+
 """
-cnaiurwedsncj
+Class that represents a normal distribution
 """
 
 
@@ -12,12 +13,10 @@ class Normal:
     def __init__(self, data=None, mean=0.0, stddev=1.0):
         """
         Initialize the Normal distribution.
-
         Args:
             data
             mean
             stddev
-
         """
         if data is None:
             if stddev <= 0:
