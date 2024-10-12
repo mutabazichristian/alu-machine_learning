@@ -47,8 +47,12 @@ class Normal:
         return coefficient * self.e**exponent
 
     def cdf(self, x):
-        """Calculate the Cumulative Distribution x-value."""
-        z = (x - self.mean) / (self.stddev)
+        """
+        Calculates the value of the CDF for a given x-value.
+        Args:
+            x: the x-value
+        """
+        z = (x - self.mean) / (self.stddev * (2**0.5))
         return 0.5 * (1 + self.erf(z))
 
     def erf(self, x):
@@ -57,7 +61,6 @@ class Normal:
         """
         if abs(x) >= 2.5:
             return 1.0 if x >= 0 else -1.0
-
         a = 0.140012
         t = 1 / (1 + a * abs(x))
         erf = 1 - t * self.e ** (
