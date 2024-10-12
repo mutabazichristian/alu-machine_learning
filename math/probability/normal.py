@@ -7,10 +7,6 @@ cnaiurwedsncj
 class Normal:
     """
     A class that represents a normal distribution.
-
-    This class can be initialized with either a list of data points
-    or mean and standard deviation parameters. It provides methods
-    to calculate various properties of the normal distribution.
     """
 
     def __init__(self, data=None, mean=0.0, stddev=1.0):
@@ -18,13 +14,10 @@ class Normal:
         Initialize the Normal distribution.
 
         Args:
-            data (list, optional): List of data points to estimate mean and stddev.
-            mean (float, optional): Mean of the distribution.
-            stddev (float, optional): Standard deviation of the distribution.
+            data 
+            mean
+            stddev 
 
-        Raises:
-            TypeError: If data is provided but is not a list.
-            ValueError: If stddev is not positive or data has less than 2 points.
         """
         if data is None:
             if stddev <= 0:
@@ -48,13 +41,13 @@ class Normal:
         return self.mean + z * self.stddev
 
     def pdf(self, x):
-        """Calculate the Probability Density Function for a given x-value."""
+        """Calculate the Probability Density Function """
         coefficient = 1 / (self.stddev * (2 * self.pi) ** 0.5)
         exponent = -0.5 * ((x - self.mean) / self.stddev) ** 2
         return coefficient * self.e**exponent
 
     def cdf(self, x):
-        """Calculate the Cumulative Distribution Function for a given x-value."""
+        """Calculate the Cumulative Distribution x-value."""
         z = (x - self.mean) / (self.stddev * 2**0.5)
         return 0.5 * (1 + self.erf(z))
 
