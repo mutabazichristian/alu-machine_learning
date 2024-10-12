@@ -50,7 +50,7 @@ class Normal:
 
     def cdf(self, x):
         """Calculate the Cumulative Distribution x-value."""
-        z = (x - self.mean) / (self.stddev * 2**0.5)
+        z = (x - self.mean) / (self.stddev)
         return 0.5 * (1 + self.erf(z))
 
     def erf(self, x):
