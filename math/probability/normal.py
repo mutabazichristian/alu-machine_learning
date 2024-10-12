@@ -50,32 +50,37 @@ class Normal:
         Calculates the value of the CDF for a given x-value.
         Args:
             x: the x-value
+        Returns:
+            The CDF value for x
         """
-        z = (x - self.mean) / (self.stddev * (2**0.5))
-        return 0.5 * (1 + self.erf(z))
+        z = (x - self.mean) / (self.stddev)
+        return (1 + self.erf(z / 2**0.5)) / 2
 
     def erf(self, x):
         """
-        Calculate the error function.
+        Calculate the error function using a Taylor series approximation.
         """
-        if abs(x) >= 2.5:
-            return 1.0 if x >= 0 else -1.0
-        a = 0.140012
-        t = 1 / (1 + a * abs(x))
-        erf = 1 - t * self.e ** (
+        # Constants
+        a1 = 0.254829592
+        a2 = -0.284496736
+        a3 = 1.421413741
+        a4 = -1.453152027
+        a5 = 1.061405429
+        p = 0.3275911
+
+        # Save the sign of x
+        sign = 1
+        if x < 0:
+            sign = -1
+        x = abs(x)
+
+        # A&S formula 7.1.26
+        t = 1.0 / (1.0 + p * x)
+        y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * self.e ** (
             -x * x
-            - 1.26551223
-            + 1.00002368 * t
-            + 0.37409196 * t**2
-            + 0.09678418 * t**3
-            - 0.18628806 * t**4
-            + 0.27886807 * t**5
-            - 1.13520398 * t**6
-            + 1.48851587 * t**7
-            - 0.82215223 * t**8
-            + 0.17087277 * t**9
         )
-        return erf if x >= 0 else -erf
+
+        return sign * y
 
     @property
     def pi(self):
