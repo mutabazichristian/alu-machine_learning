@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-
 """
-Class that represents a normal distribution
+This annoying class
 """
 
 
@@ -47,40 +46,18 @@ class Normal:
 
     def cdf(self, x):
         """
-        Calculates the value of the CDF for a given x-value.
-        Args:
-            x: the x-value
-        Returns:
-            The CDF value for x
+        Calculates the value of the
+        CDF for a given x-value
         """
-        z = (x - self.mean) / (self.stddev)
-        return (1 + self.erf(z / 2**0.5)) / 2
-
-    def erf(self, x):
-        """
-        Calculate the error function using a Taylor series approximation.
-        """
-        # Constants
-        a1 = 0.254829592
-        a2 = -0.284496736
-        a3 = 1.421413741
-        a4 = -1.453152027
-        a5 = 1.061405429
-        p = 0.3275911
-
-        # Save the sign of x
-        sign = 1
-        if x < 0:
-            sign = -1
-        x = abs(x)
-
-        # A&S formula 7.1.26
-        t = 1.0 / (1.0 + p * x)
-        y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * self.e ** (
-            -x * x
-        )
-
-        return sign * y
+        mean = self.mean
+        stddev = self.stddev
+        pi = 3.1415926536
+        value = (x - mean) / (stddev * (2 ** (1 / 2)))
+        val = value - ((value**3) / 3) + ((value**5) / 10)
+        val = val - ((value**7) / 42) + ((value**9) / 216)
+        val *= 2 / (pi ** (1 / 2))
+        cdf = (1 / 2) * (1 + val)
+        return cdf
 
     @property
     def pi(self):
