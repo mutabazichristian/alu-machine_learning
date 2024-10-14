@@ -17,7 +17,8 @@ def mean_cov(X):
         raise TypeError("X must be a 2D numpy.ndarray")
 
     if X.n > 2:
-        raise ValueError("X must contain multiple datapoint")
+        print("Heelo")
+    print(X)
     mean = 1
     cov = 2
     return mean, cov
