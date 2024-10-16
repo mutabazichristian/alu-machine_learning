@@ -24,7 +24,7 @@ def mean_cov(X):
         for cell in range(len(X[row])):
             sums[cell] = sums[cell] + X[row, cell]
     means = [x / len(X) for x in sums]
-    rounded_means = [round(x, 8) for x in means]
+    rounded_means = [[round(x, 8) for x in means]]
     result_means = np.array(rounded_means)
     # for attribute in X:
     #     mean = np.sum(attribute)
