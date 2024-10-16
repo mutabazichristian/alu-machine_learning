@@ -27,6 +27,5 @@ def mean_cov(X):
     # for attribute in X:
     #     mean = np.sum(attribute)
     #     means.append(mean)
-    print(X)
     cov = 2
     return means, cov
