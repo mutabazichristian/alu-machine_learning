@@ -17,8 +17,7 @@ def mean_cov(X):
         raise TypeError("X must be a 2D numpy.ndarray")
 
     if len(X) < 2:
-        print("Heelo")
-    print(X)
-    mean = 1
+        print("X must contain multiple data points")
+    mean = np.sum(X) / len(X)
     cov = 2
     return mean, cov
