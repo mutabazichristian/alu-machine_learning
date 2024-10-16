@@ -30,8 +30,10 @@ def mean_cov(X):
     mean = np.mean(X, axis=0, keepdims=np.True_)
 
     X_centered = X - mean
-
-    cov = np.dot(X_centered.T, X_centered) / (n - 1)
+    if n > 1:
+        cov = np.dot(X_centered.T, X_centered) / (n - 1)
+    else:
+        raise ValueError("The number of samples (n)")
 
     # for attribute in X:
     #     mean = np.sum(attribute)
