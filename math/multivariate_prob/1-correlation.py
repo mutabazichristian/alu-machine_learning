@@ -14,7 +14,7 @@ def correlation(C):
     """
     if not isinstance(C, np.ndarray):
         raise TypeError("C must be a numpy.ndarray")
-    if not C.shape:
+    if not len(C.shape) == 2:
         raise ValueError("C must be a 2D square matrix")
     a, b = C.shape
     if a != b:
