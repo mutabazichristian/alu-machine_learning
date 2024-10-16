@@ -18,7 +18,12 @@ def mean_cov(X):
 
     if len(X) < 2:
         print("X must contain multiple data points")
-    means = []
+    length_of_sums = len(X[0])
+    sums = [0] * length_of_sums
+    for row in range(len(X)):
+        for cell in range(len(X[row])):
+            sums[cell] = sums[cell] + X[row, cell]
+    means = [x / len(X[0]) for x in sums]
     # for attribute in X:
     #     mean = np.sum(attribute)
     #     means.append(mean)
