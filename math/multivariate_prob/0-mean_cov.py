@@ -33,10 +33,5 @@ def mean_cov(X):
     if n > 1:
         cov = np.dot(X_centered.T, X_centered) / (n - 1)
     else:
-        raise ValueError("The number of samples (n)")
-
-    # for attribute in X:
-    #     mean = np.sum(attribute)
-    #     means.append(mean)
-    cov = 2
+        cov = 1
     return result_means, cov
