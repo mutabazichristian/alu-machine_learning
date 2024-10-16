@@ -19,8 +19,9 @@ def mean_cov(X):
     if len(X) < 2:
         print("X must contain multiple data points")
     means = []
-    for attribute in X:
-        mean = np.sum(attribute)
-        means.append(mean)
+    # for attribute in X:
+    #     mean = np.sum(attribute)
+    #     means.append(mean)
+    print(X)
     cov = 2
     return means, cov
