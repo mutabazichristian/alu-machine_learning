@@ -23,7 +23,7 @@ def mean_cov(X):
     for row in range(len(X)):
         for cell in range(len(X[row])):
             sums[cell] = sums[cell] + X[row, cell]
-    means = [x / len(X[0]) for x in sums]
+    means = [x / len(X) for x in sums]
     # for attribute in X:
     #     mean = np.sum(attribute)
     #     means.append(mean)
