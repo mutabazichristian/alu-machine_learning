@@ -16,7 +16,7 @@ def mean_cov(X):
     if not (isinstance(X, np.ndarray) and X.ndim == 2):
         raise TypeError("X must be a 2D numpy.ndarray")
 
-    if len(X) > 2:
+    if len(X) < 2:
         print("Heelo")
     print(X)
     mean = 1
