@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-A class bioniaml dis
+A class for binomial distribution
 """
 
 
@@ -21,7 +21,6 @@ class Binomial:
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
-
             self.p = sum(data) / (len(data) * max(data))
             self.n = round(sum(data) / self.p)
             self.p = sum(data) / (self.n * len(data))
@@ -31,8 +30,9 @@ class Binomial:
         k = int(k)
         if k < 0 or k > self.n:
             return 0
-
-        coef = factorial(self.n) / (factorial(k) * factorial(self.n - k))
+        coef = self.factorial(self.n) // (
+            self.factorial(k) * self.factorial(self.n - k)
+        )
         return coef * (self.p**k) * ((1 - self.p) ** (self.n - k))
 
     def cdf(self, k):
@@ -42,9 +42,9 @@ class Binomial:
             return 0
         return sum(self.pmf(i) for i in range(k + 1))
 
-
-def factorial(n):
-    """Calculate factorial of n."""
-    if n == 0 or n == 1:
-        return 1
-    return n * factorial(n - 1)
+    @staticmethod
+    def factorial(n):
+        """Calculate factorial of n."""
+        if n == 0 or n == 1:
+            return 1
+        return n * Binomial.factorial(n - 1)
