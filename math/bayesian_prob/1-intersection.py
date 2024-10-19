@@ -8,7 +8,7 @@ import numpy as np
 
 def intersection(x, n, P, Pr):
     """
-    Calculates the intersection of obtaining data with hypothetical probabilities.
+    the intersection of obtaining data with hypothetical probabilities.
 
     Args:
         x (int): Number of patients with severe side effects
