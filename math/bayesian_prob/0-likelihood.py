@@ -4,6 +4,7 @@ This module calculates the likelihood of side effects for a cancer drug.
 """
 
 import numpy as np
+import math
 
 
 def likelihood(x, n, P):
