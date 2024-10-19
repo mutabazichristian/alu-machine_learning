@@ -3,7 +3,6 @@
 Function to calculate a correlation matrix
 """
 import numpy as np
-from numpy.core import shape
 
 
 def correlation(C):
@@ -19,5 +18,8 @@ def correlation(C):
     a, b = C.shape
     if a != b:
         raise ValueError("C must be a 2D square matrix")
-    Co = 1
+
+    std_devs = np.sqrt(np.diag(C))
+
+    Co = C / np.outer(std_devs, std_devs)
     return Co
