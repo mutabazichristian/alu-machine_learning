@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-This module calculates the posterior probability for hypothetical probabilities.
+calculates the post probability for hypothetical probabilities.
 """
 
 import numpy as np
@@ -8,8 +8,6 @@ import numpy as np
 
 def posterior(x, n, P, Pr):
     """
-    Calculates the posterior probability for various hypothetical probabilities.
-
     Args:
         x (int): Number of patients with severe side effects
         n (int): Total number of patients
