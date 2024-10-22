@@ -14,7 +14,7 @@ def convolve_grayscale_valid(images, kernel):
         i, m, n = images.shape
         m = m - a + 1
         n = n - b + 1
-        convo = np.zeros(m, n)
+        convo = np.zeros((m, n))
         for l in range(m):
             for j in range(n):
                 convo[l, j] = np.sum(
