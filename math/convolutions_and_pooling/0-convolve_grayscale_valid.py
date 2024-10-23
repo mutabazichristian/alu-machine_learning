@@ -24,15 +24,15 @@ def convolve_grayscale_valid(images, kernel):
     m = images.shape[0]
     h = images.shape[1]
     w = images.shape[2]
-    kh = images.shape[0]
-    kw = images.shape[1]
+    kh = kernel.shape[0]
+    kw = kernel.shape[1]
 
     convolved_height = h - kh + 1
     convolved_width = w - kw + 1
-    convolved = np.zeros((convolved_height, convolved_width))
+    convolved = np.zeros((m, convolved_height, convolved_width))
 
-    for i in range(h):
-        for j in range(w):
+    for i in range(convolved_height):
+        for j in range(convolved_width):
             box = images[:, i : i + kh, j : j + kh]
             convolved[:, i, j] = np.sum(box * kernel, axis=(1, 2))
 
