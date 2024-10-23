@@ -1,23 +1,39 @@
 #!/usr/bin/env python3
-"""Function that performas a valid convolution on grayscale images"""
+"""
+Function that performs a valid convolution on grayscale images
+"""
 import numpy as np
 
 
 def convolve_grayscale_valid(images, kernel):
     """
     Arguments:
-    images, a numpy array that contains images to convolve
-    kernel, numpy array containing the filter matrix
+        image(m,h,w) is a numpy array:
+            m is the number of images
+            h is the height in pixels of the images
+            w is the width in pixels of the images
+
+        kernel(kh, kw) is a numpy array:
+            kh is height of the kernel
+            kw is the width of the kernel
+
+    Returns:
+        a numpy array containing the convolved images
     """
-    a, b = kernel.shape
-    if b == a:
-        i, m, n = images.shape
-        m = m - a + 1
-        n = n - b + 1
-        convo = np.zeros((m, n))
-        for l in range(m):
-            for j in range(n):
-                convo[l, j] = np.sum(
-                    kernel * images[i : i + m, j : j + n]
-                )
-        convo = np.zeros((i, m, n))
+
+    m = images.shape[0]
+    h = images.shape[1]
+    w = images.shape[2]
+    kh = images.shape[0]
+    kw = images.shape[1]
+
+    convolved_height = h - kh + 1
+    convolved_width = w - kw + 1
+    convolved = np.zeros((convolved_height, convolved_width))
+
+    for i in range(h):
+        for j in range(w):
+            box = images[:, i : i + kh, j : j + kh]
+            convolved[:, i, j] = np.sum(box * kernel, axis=(1, 2))
+
+    return convolved
