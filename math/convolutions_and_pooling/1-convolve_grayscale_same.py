@@ -29,3 +29,5 @@ def convolve_grayscale_same(images, kernel):
         for j in range(w):
             box = padded[:, i : i + kh, j : j + kw]
             convolved[:, i, j] = np.sum(box * kernel, axis=(1, 2))
+
+    return convolved
