@@ -4,7 +4,7 @@ Class that defines a single neuron perfoming binary classification
 """
 import numpy as np
 
-class NeuronL:
+class Neuron:
     def __init__(self,nx):
         if not nx.isdigit():
             raise TypeError("nx must be an integer")
