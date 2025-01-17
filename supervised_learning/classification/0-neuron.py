@@ -6,7 +6,7 @@ import numpy as np
 
 class Neuron:
     def __init__(self,nx):
-        if not nx.isdigit():
+        if not isinstance(nx,int):
             raise TypeError("nx must be an integer")
         if not nx>=1:
             raise ValueError("nx must be a positive number")
