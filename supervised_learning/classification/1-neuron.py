@@ -19,9 +19,9 @@ class Neuron:
         self.__A = 0
 
         @property
-        def A(self):
+        def W(self):
             """The A property."""
-            return self._A
+            return self._W
 
         @property
         def b(self):
