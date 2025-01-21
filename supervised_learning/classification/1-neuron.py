@@ -21,14 +21,14 @@ class Neuron:
         @property
         def W(self):
             """The A property."""
-            return self._W
+            return self.__W
 
         @property
         def b(self):
             """The b property."""
-            return self._b
+            return self.__b
 
         @property
         def A(self):
             """The A property."""
-            return self._A
+            return self.__A
