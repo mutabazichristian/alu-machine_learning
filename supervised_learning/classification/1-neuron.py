@@ -4,6 +4,10 @@ import numpy as np
 
 
 class Neuron:
+    """
+    Class that defines a single neuron
+    """
+
     def __init__(self, nx):
         if not isinstance(nx, int):
             raise TypeError("nx must be a integer")
@@ -14,11 +18,17 @@ class Neuron:
         self.__b = 0
         self.__A = 0
 
-        def get_W(self):
-            return self.__W
+        @property
+        def A(self):
+            """The A property."""
+            return self._A
 
-        def get_b(self):
-            return self.__b
+        @property
+        def b(self):
+            """The b property."""
+            return self._b
 
-        def get_A(self):
-            return self.__A
+        @property
+        def A(self):
+            """The A property."""
+            return self._A
