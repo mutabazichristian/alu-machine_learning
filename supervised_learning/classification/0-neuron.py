@@ -14,7 +14,7 @@ class Neuron:
     def __init__(self, nx):
         if not isinstance(nx, int):
             raise TypeError("nx must be an integer")
-        if nx < 0:
+        if nx <= 0:
             raise ValueError("nx must be a positive number")
 
         self.W = np.random.randn(1, nx)
