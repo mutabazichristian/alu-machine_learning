@@ -37,32 +37,32 @@ class NeuralNetwork:
         self.__b2 = 0
         self.__A2 = 0
 
-        @property
-        def W1(self):
-            """The W1 property."""
-            return self.__W1
+    @property
+    def W1(self):
+        """The W1 property."""
+        return self.__W1
 
-        @property
-        def b1(self):
-            """The b1 property."""
-            return self.__b1
+    @property
+    def b1(self):
+        """The b1 property."""
+        return self.__b1
 
-        @property
-        def A1(self):
-            """The A1 property."""
-            return self.__A1
+    @property
+    def A1(self):
+        """The A1 property."""
+        return self.__A1
 
-        @property
-        def W2(self):
-            """The W2 property."""
-            return self.__W2
+    @property
+    def W2(self):
+        """The W2 property."""
+        return self.__W2
 
-        @property
-        def b2(self):
-            """The W2 property."""
-            return self.__b2
+    @property
+    def b2(self):
+        """The W2 property."""
+        return self.__b2
 
-        @property
-        def A2(self):
-            """The A2 property."""
-            return self.__A2
+    @property
+    def A2(self):
+        """The A2 property."""
+        return self.__A2
