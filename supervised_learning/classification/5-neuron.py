@@ -42,7 +42,7 @@ class Neuron:
         forward propagation, linear and activation function
         """
         temp = np.dot(self.__W, X) + self.__b
-        self.__A = 1 / (1 + exp(-temp))
+        self.__A = 1 / (1 + np.exp(-temp))
         return self.__A
 
     def cost(self, Y, A):
@@ -61,3 +61,19 @@ class Neuron:
         cost = self.cost(Y, A)
         predictions = np.where(A >= 0.5, 1, 0)
         return predictions, cost
+
+    def gradient_descent(self, X, Y, A, alpha=0.0.5):
+        """
+        gradient descent function
+        Arguments:
+            X numpy array
+            Y numpy array
+            A numpy array
+            alpha: learning rate
+        """
+        m = X.shape[1]  # Number of examples
+        dZ = A - Y  # Derivative of cost with respect to Z
+        dW = np.dot(dZ, X.T) / m  # Gradient of weights
+        db = np.sum(dZ) / m  # Gradient of bias
+        self.__W -= alpha * dW  # Update weights
+        self.__b -= alpha * db  # Update bias
