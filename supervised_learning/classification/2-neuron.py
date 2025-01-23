@@ -1,43 +1,43 @@
-#!/usr/bin/env python3
-"""Neuron module for binary classification."""
-
-import numpy as np
+#!/usr/bin/env python
+"""
+Class that defines a single neuron performing binary classification 
+"""
 
 
 class Neuron:
-    """Defines a single neuron for binary classification."""
-    
-    def __init__(self, nx):
-        """
-        Initialize a Neuron instance.
+    """
+    Class blablabla
+    """
 
-        Args:
-            nx (int): The number of input features to the neuron.
-        Raises:
-            TypeError: If nx is not an integer.
-            ValueError: If nx is less than 1.
-        """
+    def __init__(self, nx):
         if not isinstance(nx, int):
-            raise TypeError("nx must be an integer")
+            raise TypeError("nx must be a integer")
         if nx < 1:
             raise ValueError("nx must be positive")
-        
-        # Private attributes
-        self.__W = np.random.randn(1, nx)  # Weights vector
-        self.__b = 0  # Bias
-        self.__A = 0  # Activated output (prediction)
+
+        self.__w = np.random.randn(1, nx)
+        self.__b = 0
+        self.__A = 0
 
     @property
     def W(self):
-        """Getter for the weights vector."""
+        """The W property."""
         return self.__W
 
     @property
     def b(self):
-        """Getter for the bias."""
+        """The b property."""
         return self.__b
 
     @property
     def A(self):
-        """Getter for the activated output."""
+        """The A property."""
         return self.__A
+
+    def forward_prop(self, X):
+        """
+        function that performs the linear operation
+        and adds a sigmoid function as activation
+        """
+        temp = np.dot(self.__W, X) + self.__b
+        self.__A = 1 / (1 - np.exp(-temp))
