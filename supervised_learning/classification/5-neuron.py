@@ -62,7 +62,7 @@ class Neuron:
         predictions = np.where(A >= 0.5, 1, 0)
         return predictions, cost
 
-    def gradient_descent(self, X, Y, A, alpha=0.0.5):
+    def gradient_descent(self, X, Y, A, alpha=0.05):
         """
         gradient descent function
         Arguments:
