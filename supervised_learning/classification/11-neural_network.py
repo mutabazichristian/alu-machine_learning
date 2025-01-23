@@ -63,6 +63,7 @@ class NeuralNetwork:
         cost = (-1 / m) * np.sum(
             Y * np.log(A + 1e-10) + (1 - Y) * np.log(1.0000001 - A)
         )
+        cost = np.round(cost, 10)
         return cost
 
     @property
