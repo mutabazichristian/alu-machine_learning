@@ -3,7 +3,6 @@
 Class that defines a single neuron performing binary classification
 """
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 class Neuron:
@@ -79,9 +78,7 @@ class Neuron:
         self.__W -= alpha * dW  # Update weights
         self.__b -= alpha * db  # Update bias
 
-    def train(
-        self, X, Y, iterations=5000, alpha=0.05, verbose=True, graph=True, step=100
-    ):
+    def train(self, X, Y, iterations=5000, alpha=0.05):
         """
         Args:
             X,Y,iterations,alpha
@@ -94,32 +91,9 @@ class Neuron:
             raise TypeError("alpha must be a float")
         if alpha <= 0:
             raise ValueError("alpha must be positive")
-        if verbose or graph:
-            if not isinstance(step, int):
-                raise TypeError("step must be positive")
-            if step <= 0 or step > iterations:
-                raise ValueError("Step must be positive and <= iterations")
 
-        cost = []
-        for i in range(iterations):
+        for _ in range(iterations):
             A = self.forward_prop(X)
             self.gradient_descent(X, Y, A, alpha)
-
-            if verbose and i % step == 0:
-                cost = self.cost(Y, A)
-                print(f"Cost after{i} iterations: {cost}")
-                cost.append((i, cost))
-
-        if verbose:
-            print(f"Cost after {iterations} iterations: {cost}")
-        costs.append((iterations, cost))
-
-        if graph:
-            iterations_list, costs_list = zip(*costs)
-            plt.plot(iterations_list, costs_list, "b-")
-            plt.xlabel("iteration")
-            plt.ylabel("cost")
-            plt.title("Training Cost")
-            plt.show()
 
         return self.evaluate(X, Y)
