@@ -1,8 +1,8 @@
-import numpy as np
-
+#!/usr/bin/env python3
 """
 Class that defines a neural network with one hidden layer
 """
+import numpy as np
 
 
 class NeuralNetwork:
