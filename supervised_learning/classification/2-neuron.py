@@ -3,6 +3,7 @@
 Class that defines a single neuron performing binary classification 
 """
 
+
 class Neuron:
     """
     Class blablabla
