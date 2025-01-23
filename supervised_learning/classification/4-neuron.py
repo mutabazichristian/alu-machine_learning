@@ -1,91 +1,63 @@
 #!/usr/bin/env python3
-"""Neuron module for binary classification."""
-
+"""
+Class that defines a single neuron performing binary classification
+"""
 import numpy as np
 
 
 class Neuron:
-    """Defines a single neuron for binary classification."""
+    """
+    The activation
+    """
 
     def __init__(self, nx):
         """
-        Initialize a Neuron instance.
-
-        Args:
-            nx (int): The number of input features to the neuron.
-        Raises:
-            TypeError: If nx is not an integer.
-            ValueError: If nx is less than 1.
+        The constuctor
         """
         if not isinstance(nx, int):
-            raise TypeError("nx must be an integer")
+            raise TypeError("nx must be a integer")
         if nx < 1:
-            raise ValueError("nx must be positive")
-        
+            raise TypeError("nx must be positive")
         self.__W = np.random.randn(1, nx)
         self.__b = 0
         self.__A = 0
 
     @property
     def W(self):
-        """Getter for the weights vector."""
+        """The W property."""
         return self.__W
 
     @property
     def b(self):
-        """Getter for the bias."""
+        """The b property."""
         return self.__b
 
     @property
     def A(self):
-        """Getter for the activated output."""
+        """The A property."""
         return self.__A
 
     def forward_prop(self, X):
         """
-        Perform forward propagation.
-
-        Args:
-            X (numpy.ndarray): Input data with shape (nx, m).
-        Returns:
-            numpy.ndarray: The activated output (predictions).
+        forward propagation, linear and activation function
         """
-        z = np.dot(self.__W, X) + self.__b
-        self.__A = 1 / (1 + np.exp(-z))  # Sigmoid activation
+        temp = np.dot(self.__W, X) + self.__b
+        self.__A = 1 / (1 + exp(-temp))
         return self.__A
 
     def cost(self, Y, A):
         """
-        Calculate the cost using logistic regression.
-
-        Args:
-            Y (numpy.ndarray): Correct labels with shape (1, m).
-            A (numpy.ndarray): Activated output with shape (1, m).
-        Returns:
-            float: The logistic regression cost.
+        Cost function that calculates the loss
         """
-        m = Y.shape[1]  # Number of examples
-        cost = -(1 / m) * np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
+        m = Y.shape[1]
+        cost = -np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A)) / m
         return cost
 
-    def gradient_descent(self, X, Y, A, alpha=0.05):
+    def evaluate(self, X, Y):
         """
-        Perform one pass of gradient descent.
-
-        Args:
-            X (numpy.ndarray): Input data with shape (nx, m).
-            Y (numpy.ndarray): Correct labels with shape (1, m).
-            A (numpy.ndarray): Activated output with shape (1, m).
-            alpha (float): Learning rate.
-        Updates:
-            __W: Weights after one pass of gradient descent.
-            __b: Bias after one pass of gradient descent.
+        Evaluation function
         """
-        m = X.shape[1]  # Number of examples
-        dz = A - Y
-        dW = (1 / m) * np.dot(dz, X.T)
-        db = (1 / m) * np.sum(dz)
-
-        # Update weights and bias
-        self.__W -= alpha * dW
-        self.__b -= alpha * db
+        A = self.forward_prop(X)
+        cost = self.cost(Y, A)
+        predictions = np.where(A >= 0.5, 1, 0)
+        return predictions, cost
