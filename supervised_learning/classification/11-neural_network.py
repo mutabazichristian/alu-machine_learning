@@ -34,7 +34,7 @@ class NeuralNetwork:
         self.__b1 = np.zeros((nodes, 1))
         self.__A1 = None
         self.__W2 = np.random.randn(1, nodes)
-        self.__b2 = 0
+        self.__b2 = np.zeros((1, 1))
         self.__A2 = None
         self.__nx = nx
         self.__nodes = nodes
