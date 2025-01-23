@@ -41,4 +41,5 @@ class Neuron:
         and adds a sigmoid function as activation
         """
         temp = np.dot(self.__W, X) + self.__b
-        self.__A = 1 / (1 - np.exp(-temp))
+        self.__A = 1 / (1 + np.exp(-temp))
+        return self.__A
