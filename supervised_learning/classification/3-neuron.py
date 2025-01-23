@@ -6,13 +6,14 @@ import numpy as np
 
 
 class Neuron:
-"""
-The activation
-"""
+    """
+    The activation
+    """
+
     def __init__(self, nx):
-    """
-    The constuctor
-    """
+        """
+        The constuctor
+        """
         if not isinstance(nx, int):
             raise TypeError("nx must be a integer")
         if nx < 1:
