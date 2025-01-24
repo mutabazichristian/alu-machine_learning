@@ -61,8 +61,9 @@ class NeuralNetwork:
         """
         m = Y.shape[1]
         cost = -np.sum((Y * np.log(A)) + ((1 - Y) * np.log(1.0000001 - A))) / m
-        return cost       return cost @ property
+        return cost
 
+    @property
     def W1(self):
         """The W1 property."""
         return self.__W1
