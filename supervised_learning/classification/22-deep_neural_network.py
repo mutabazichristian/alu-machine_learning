@@ -1,82 +1,125 @@
 #!/usr/bin/env python3
 """
-Deep neural network
+    A class DeepNeuralNetwork that defines a deep neural
+    network performing binary classification
 """
+
 import numpy as np
 
 
 class DeepNeuralNetwork:
     """
-    Deep
+    A class DeepNeuralNetwork
     """
 
     def __init__(self, nx, layers):
-        """Init DNN: nx input, layers node list"""
-        if not isinstance(nx, int) or nx < 1:
-            raise ValueError("nx must be a positive int")
+        """DeepNeuralNetwork class constructor"""
+        if not isinstance(nx, int):
+            raise TypeError("nx must be an integer")
+        if nx < 1:
+            raise ValueError("nx must be a positive integer")
         if not isinstance(layers, list) or len(layers) == 0:
-            raise TypeError("layers must be a non-empty list")
+            raise TypeError("layers must be a list of positive integers")
 
         self.__L = len(layers)
         self.__cache = {}
         self.__weights = {}
+        self.nx = nx
+        self.layers = layers
 
-        for i in range(1, self.__L + 1):
-            size = nx if i == 1 else layers[i - 2]
-            self.__weights[f"W{i}"] = np.random.randn(layers[i - 1], size) * np.sqrt(
-                2 / size
-            )
-            self.__weights[f"b{i}"] = np.zeros((layers[i - 1], 1))
+        # Initialize weights and biases and validate layers in one loop
+        for i in range(self.__L):
+            if not isinstance(layers[i], int) or layers[i] < 1:
+                raise TypeError("layers must be a list of positive integers")
+            if i == 0:
+                self.__weights["W1"] = np.random.randn(layers[i], nx) * np.sqrt(2 / nx)
+            else:
+                self.__weights["W" + str(i + 1)] = np.random.randn(
+                    layers[i], layers[i - 1]
+                ) * np.sqrt(2 / layers[i - 1])
+            self.__weights["b" + str(i + 1)] = np.zeros((layers[i], 1))
 
-    def __sigmoid(self, Z):
-        """Sigmoid activation"""
-        return 1 / (1 + np.exp(-Z))
+    # create the getter functions of the deep network
+    @property
+    def L(self):
+        """return the L attribute"""
+        return self.__L
 
-    def __sigmoid_derivative(self, A):
-        """Sigmoid derivative"""
-        return A * (1 - A)
+    @property
+    def cache(self):
+        """return the cache attribute"""
+        return self.__cache
+
+    @property
+    def weights(self):
+        """return the weights attribute"""
+        return self.__weights
 
     def forward_prop(self, X):
-        """Forward prop"""
+        """
+        Calculates the forward propagation of
+        the deep neural network
+        """
         self.__cache["A0"] = X
-        for i in range(1, self.__L + 1):
-            Z = (
-                np.dot(self.__weights[f"W{i}"], self.__cache[f"A{i-1}"])
-                + self.__weights[f"b{i}"]
-            )
-            self.__cache[f"Z{i}"] = Z
-            self.__cache[f"A{i}"] = self.__sigmoid(Z)
-        return self.__cache[f"A{self.__L}"], self.__cache
+        for i in range(self.__L):
+            W = self.__weights["W{}".format(i + 1)]
+            b = self.__weights["b{}".format(i + 1)]
+            A = self.__cache["A{}".format(i)]
+            Z = np.matmul(W, A) + b
+            self.__cache["A{}".format(i + 1)] = 1 / (1 + np.exp(-Z))
+
+        return self.__cache["A{}".format(self.__L)], self.__cache
 
     def cost(self, Y, A):
-        """Binary cross-entropy loss"""
+        """
+        Calculates the cost of the model
+        """
         m = Y.shape[1]
-        return -np.sum(Y * np.log(A) + (1 - Y) * np.log(1 - A)) / m
+        cost = -np.sum((Y * np.log(A)) + ((1 - Y) * np.log(1.0000001 - A))) / m
+        return cost
 
     def evaluate(self, X, Y):
-        """Eval DNN"""
+        """
+        Evaluates the deep neural network
+        """
         A, _ = self.forward_prop(X)
-        pred = np.where(A >= 0.5, 1, 0)
-        return pred, self.cost(Y, A)
+        cost = self.cost(Y, A)
+        A = np.where(A >= 0.5, 1, 0)
+        return A, cost
+
+    def gradient_descent(self, Y, cache, alpha=0.05):
+        """
+        Calculates one pass of gradient descent on the deep neural network
+        """
+        m = Y.shape[1]
+        A = cache["A{}".format(self.__L)]
+        dZ = A - Y
+        for i in reversed(range(self.__L)):
+            A = cache["A{}".format(i + 1)]
+            A_prev = cache["A{}".format(i)]
+            W = self.__weights["W{}".format(i + 1)]
+            b = self.__weights["b{}".format(i + 1)]
+            dW = np.matmul(dZ, A_prev.T) / m
+            db = np.sum(dZ, axis=1, keepdims=True) / m
+            dZ = np.matmul(W.T, dZ) * A_prev * (1 - A_prev)
+            self.__weights["W{}".format(i + 1)] -= alpha * dW
+            self.__weights["b{}".format(i + 1)] -= alpha * db
+            self.__cache["A{}".format(i)] = A
+        return self.__weights, self.__cache
 
     def train(self, X, Y, iterations=5000, alpha=0.05):
-        """Train DNN"""
-        if not isinstance(iterations, int) or iterations <= 0:
-            raise ValueError("iterations must be a positive int")
-        if not isinstance(alpha, float) or alpha <= 0:
-            raise ValueError("alpha must be a positive float")
-
-        for _ in range(iterations):
-            A, cache = self.forward_prop(X)
-            m = Y.shape[1]
-            dZ = A - Y
-            for i in range(self.__L, 0, -1):
-                dW = np.dot(dZ, cache[f"A{i-1}"].T) / m
-                db = np.sum(dZ, axis=1, keepdims=True) / m
-                self.__weights[f"W{i}"] -= alpha * dW
-                self.__weights[f"b{i}"] -= alpha * db
-                if i > 1:
-                    dZ = np.dot(
-                        self.__weights[f"W{i}"].T, dZ
-                    ) * self.__sigmoid_derivative(cache[f"A{i-1}"])
-        return self.forward_prop(X)
+        """
+        Trains the deep neural network
+        """
+        if type(iterations) is not int:
+            raise TypeError("iterations must be an integer")
+        if iterations < 1:
+            raise ValueError("iterations must be a positive integer")
+        if type(alpha) is not float:
+            raise TypeError("alpha must be a float")
+        if alpha < 0:
+            raise ValueError("alpha must be positive")
+        for i in range(iterations):
+            self.forward_prop(X)
+            self.gradient_descent(Y, self.__cache, alpha)
+        return self.evaluate(X, Y)
