@@ -57,19 +57,11 @@ class NeuralNetwork:
 
     def cost(self, Y, A):
         """
-        Calculates the cost of the model using logistic regression
-
-        Args:
-            Y (numpy.ndarray): Shape (1, m) containing correct labels
-            A (numpy.ndarray): Shape (1, m) containing activated output
-
-        Returns:
-            float: The calculated cost
+        Cost funciton
         """
         m = Y.shape[1]
-        # Avoid division by zero by using 1.0000001 - A
-        cost = -1 / m * np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
-        return cost @ property
+        cost = -np.sum((Y * np.log(A)) + ((1 - Y) * np.log(1.0000001 - A))) / m
+        return cost       return cost @ property
 
     def W1(self):
         """The W1 property."""
