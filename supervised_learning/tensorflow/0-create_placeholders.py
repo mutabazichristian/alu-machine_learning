@@ -3,7 +3,7 @@
 import tensorflow as tf
 
 
-def create_placeholder(nx, classes):
+def create_placeholders(nx, classes):
     """
     Args:
         nx: the number of feauture columns in our data
@@ -12,6 +12,6 @@ def create_placeholder(nx, classes):
         x: is the placeholder for the input data to the neural network
         y: is the placeholder for the one-hot lables for the input data
     """
-    x = tf.placeholder(dtype=tf.float32, shape=(None, nx), name="x")
-    y = tf.placeholder(dtype=tf.float32, shape=(None, classes), name="y")
+    x = tf.placeholder(tf.float32, shape=(None, nx), name="x")
+    y = tf.placeholder(tf.float32, shape=(None, classes), name="y")
     return x, y
