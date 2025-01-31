@@ -14,5 +14,5 @@ def calculate_accuracy(y, y_pred):
         the accuracy of the predictoin
     """
     return tf.reduce_mean(
-        tf.cast(tf.equal(tf.argmax(y, 1), tf.argmax(y_pred)), tf.float32)
+        tf.cast(tf.equal(tf.argmax(y, 1), tf.argmax(y_pred, 1)), tf.float32)
     )
