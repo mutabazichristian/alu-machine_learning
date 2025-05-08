@@ -2,8 +2,8 @@
 """
 Class NSt that pefroms tasks for neural style transfer
 """
-
 import numpy as np
+import tensorflow as tf
 
 class NST:
     """The Class in question"""
