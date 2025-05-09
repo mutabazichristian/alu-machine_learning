@@ -50,7 +50,8 @@ class NST:
         self.alpha = alpha
         self.beta = beta
 
-    def scale_image(self, image):
+    @staticmethod
+    def scale_image(image):
         """
         image: numpy array with shape (h, w, e), with image to be scaled
 
