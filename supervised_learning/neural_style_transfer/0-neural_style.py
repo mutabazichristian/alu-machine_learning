@@ -41,3 +41,18 @@ class NST:
         """
         if not isinstance(image, np.ndarray) or image.ndim !=3 or image.shape[2] != 3:
             raise TypeError('image must be a numpy.ndarray with shape(h, w, 3)')
+
+        h,w= image.shape
+        if h>w:
+            new_h = 512
+            new_w = int((w/h*512))
+        else: w<h:
+            new_w = 512
+            new_h = int((h/w)*512)
+
+        image.resized = tf.image.resize(image,(new_h,new_w), method='bicubic')
+        image.resized = tf.cast(image_resized, tf.float32)/255.0
+
+        image_scaled = tf.expand_dims(image_resized, axis=0)
+        return image_scaled 
+
