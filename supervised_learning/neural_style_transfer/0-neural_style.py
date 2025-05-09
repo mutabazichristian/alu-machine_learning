@@ -4,7 +4,6 @@ Class NSt that pefroms tasks for neural style transfer
 """
 import numpy as np
 import tensorflow as tf
-from tensorflow.image import resize_images
 
 
 class NST:
