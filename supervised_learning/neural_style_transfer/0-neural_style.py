@@ -2,6 +2,7 @@
 """
 Class NSt that pefroms tasks for neural style transfer
 """
+
 import numpy as np
 import tensorflow as tf
 
@@ -57,25 +58,21 @@ class NST:
 
         returns: scaled image, tf.tensor with shaped (1, h_new, w_new, 3)
         """
-        if not isinstance(image, np.ndarray) or image.ndim != 3 or image.shape[2] != 3:
-            raise TypeError("image must be a numpy.ndarray with shape(h, w, 3)")
-
-        h, w = image.shape
+        if type(image) is not np.ndarray or len(image.shape) != 3:
+            raise TypeError("image must be a numpy.ndarray with shape (h, w, 3)")
+        h, w, c = image.shape
+        if h <= 0 or w <= 0 or c != 3:
+            raise TypeError("image must be a numpy.ndarray with shape (h, w, 3)")
         if h > w:
-            new_h = 512
-            new_w = int((w / h * 512))
+            h_new = 512
+            w_new = int(w * (512 / h))
         else:
-            new_w = 512
-            new_h = int((h / w) * 512)
-        # Convert to float32 and normalize to [0, 1]
-        image = image.astype("float32") / 255.0
+            w_new = 512
+            h_new = int(h * (512 / w))
 
-        # Expand dims to make it (1, h, w, 3)
-        image = np.expand_dims(image, axis=0)
-
-        # Use tf.compat.v1 for resizing
-        image_tensor = tf.convert_to_tensor(image)
-        resized = tf.image.resize_images(
-            image_tensor, size=(new_h, new_w), method=tf.image.ResizeMethod.BICUBIC
+        resized = tf.image.resize_bicubic(
+            np.expand_dims(image, axis=0), size=(h_new, w_new)
         )
-        return resized
+        rescaled = resized / 255
+        rescaled = tf.clip_by_value(rescaled, 0, 1)
+        return rescaled
