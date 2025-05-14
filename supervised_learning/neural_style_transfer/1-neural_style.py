@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Class NSt that pefroms tasks for neural style transfer
+Class NSt that performs tasks for neural style transfer
 """
 
 import numpy as np
@@ -57,6 +57,9 @@ class NST:
         self.alpha = alpha
         self.beta = beta
 
+        # Load the model
+        self.model = self.load_model()
+
     @staticmethod
     def scale_image(image):
         """
@@ -86,3 +89,23 @@ class NST:
         rescaled = resized / 255
         rescaled = tf.clip_by_value(rescaled, 0, 1)
         return rescaled
+
+    def load_model(self):
+        """
+        Creates the model used to calculate cost
+        Returns: the Keras model
+        """
+        # Load VGG19 model
+        vgg = tf.keras.applications.vgg19.VGG19(include_top=False, weights='imagenet')
+        
+        # Create a new model that outputs the style and content layers
+        outputs = [vgg.get_layer(layer).output for layer in self.style_layers]
+        outputs.append(vgg.get_layer(self.content_layer).output)
+        
+        # Create model
+        model = tf.keras.Model([vgg.input], outputs)
+        
+        # Set model to not trainable
+        model.trainable = False
+        
+        return model 
