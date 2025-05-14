@@ -4,7 +4,6 @@
 Class NST that performs tasts for neural style transfer
 """
 import numpy as np
-from numpy.ma import shape
 import tensorflow as tf
 
 
