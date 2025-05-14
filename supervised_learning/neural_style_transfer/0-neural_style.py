@@ -57,7 +57,7 @@ class NST:
             returns:
                 the scaled image
             """
-            if not isinstance(image, np.ndarray) or image.shape != 3:
+            if not isinstance(image, np.ndarray) or len(image.shape) != 3:
                 raise TypeError(
                     "image must be a numpy.ndarray with shape (h, w, 3)"
                 )
