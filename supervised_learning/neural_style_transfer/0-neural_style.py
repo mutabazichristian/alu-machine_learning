@@ -3,8 +3,6 @@
 """
 Class NST that performs tasts for neural style transfer
 """
-from typing import Type
-from matplotlib.pyplot import style
 import numpy as np
 import tensorflow as tf
 
