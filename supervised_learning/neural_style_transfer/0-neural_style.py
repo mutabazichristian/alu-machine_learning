@@ -3,6 +3,8 @@
 """
 Class NST that performs tasts for neural style transfer
 """
+from typing import Type
+from matplotlib.pyplot import style
 import numpy as np
 import tensorflow as tf
 
@@ -31,28 +33,21 @@ class NST:
             alpha: the weight for the content cost
             beta: the weight for the style cost
         """
-        if (
-            not isinstance(style_image, np.ndarray)
-            or len(style_image.shape) != 3
-        ):
+        if type(style_image) is not np.ndarray or len(style_image.shape) != 3:
             raise TypeError(
                 "style_image must be a numpy.ndarray with shape (h, w, 3)"
             )
-
         if (
-            not isinstance(content_image, np.ndarray)
+            type(content_image) is not np.ndarray
             or len(content_image.shape) != 3
         ):
             raise TypeError(
                 "content_image must be a numpy.ndarray with shape (h, w, 3)"
             )
-
-        if not isinstance(alpha, int) or alpha < 0:
+        if type(alpha) is not int or alpha < 0:
             raise TypeError("alpha must be a non-negative number")
-
-        if not isinstance(beta, int) or beta < 0:
-            raise TypeError("alpha must be a non-negative number")
-
+        if type(beta) is not int or beta < 0:
+            raise TypeError("beta must be a non-negative number")
         tf.enable_eager_execution()
 
         self.style_image = style_image
