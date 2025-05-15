@@ -29,12 +29,18 @@ class NST:
             alpha: the weight for the content cost
             beta: the weight for the style cost
         """
-        if not isinstance(style_image, np.ndarray) or style_image.shape != 3:
+        if (
+            not isinstance(style_image, np.ndarray)
+            or len(style_image.shape) != 3
+        ):
             raise TypeError(
                 "style_image must be a numpy.ndarray with shape (h, w, 3)"
             )
 
-        if not isinstance(content_image, np.ndarray) or style_image.shape != 3:
+        if (
+            not isinstance(content_image, np.ndarray)
+            or len(content_image.shape) != 3
+        ):
             raise TypeError(
                 "content_image must be a numpy.ndarray with shape (h, w, 3)"
             )
@@ -45,38 +51,38 @@ class NST:
         if not isinstance(beta, int) or beta < 0:
             raise TypeError("alpha must be a non-negative number")
 
-        @staticmethod
-        def scale_image(image):
-            """
-            Method that rescales an image such that its pixels values are between 0 and 1
-            and its largest side is 512 pixels
+    @staticmethod
+    def scale_image(image):
+        """
+        Method that rescales an image such that its pixels values are between 0 and 1
+        and its largest side is 512 pixels
 
-            Arg:
-                image: a numpy.ndarray of shape (h, w, 3)
+        Arg:
+            image: a numpy.ndarray of shape (h, w, 3)
 
-            returns:
-                the scaled image
-            """
-            if not isinstance(image, np.ndarray) or len(image.shape) != 3:
-                raise TypeError(
-                    "image must be a numpy.ndarray with shape (h, w, 3)"
-                )
-
-            h, w, c = image.shape
-            if h <= 0 or w <= 0 or c != 3:
-                raise TypeError(
-                    "image must be a numpy.ndarray with shape (h, w, 3)"
-                )
-            if h > w:
-                h_new = 512
-                w_new = int(w * (512 / h))
-            else:
-                w_new = 512
-                h_new = int(h * (512 / w))
-
-            resized = tf.image.resize_bicubic(
-                np.expand_dims(image, axis=0), size=(h_new, w_new)
+        returns:
+            the scaled image
+        """
+        if not isinstance(image, np.ndarray) or len(image.shape) != 3:
+            raise TypeError(
+                "image must be a numpy.ndarray with shape (h, w, 3)"
             )
-            rescaled = resized / 255
-            rescaled = tf.clip_by_value(rescaled, 0, 1)
-            return rescaled
+
+        h, w, c = image.shape
+        if h <= 0 or w <= 0 or c != 3:
+            raise TypeError(
+                "image must be a numpy.ndarray with shape (h, w, 3)"
+            )
+        if h > w:
+            h_new = 512
+            w_new = int(w * (512 / h))
+        else:
+            w_new = 512
+            h_new = int(h * (512 / w))
+
+        resized = tf.image.resize_bicubic(
+            np.expand_dims(image, axis=0), size=(h_new, w_new)
+        )
+        rescaled = resized / 255
+        rescaled = tf.clip_by_value(rescaled, 0, 1)
+        return rescaled
