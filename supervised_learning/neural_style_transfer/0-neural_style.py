@@ -24,8 +24,10 @@ class NST:
     def __init__(self, style_image, content_image, alpha=1e4, beta=1):
         """
         Args:
-            style_image: the image used as a style reference, stored as a numpy.ndarray
-            content_image: the imaged used as a content reference, stored as a numpy.ndarray
+            style_image: the image used as a style reference,
+            stored as a numpy.ndarray
+            content_image: the imaged used as a content reference,
+            stored as a numpy.ndarray
             alpha: the weight for the content cost
             beta: the weight for the style cost
         """
@@ -51,12 +53,13 @@ class NST:
             raise TypeError("alpha must be a non-negative number")
 
         if not isinstance(beta, int) or beta < 0:
-            raise TypeError("alpha must be a non-negative number")
+            raise TypeError("beta must be a non-negative number")
 
         @staticmethod
         def scale_image(image):
             """
-            Method that rescales an image such that its pixels values are between 0 and 1
+            Method that rescales an image such that its
+            pixels values are between 0 and 1
             and its largest side is 512 pixels
 
             Arg:
