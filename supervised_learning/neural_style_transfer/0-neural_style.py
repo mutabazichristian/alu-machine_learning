@@ -55,6 +55,11 @@ class NST:
         if not isinstance(beta, int) or beta < 0:
             raise TypeError("beta must be a non-negative number")
 
+        self.content_image = self.scale_image(content_image)
+        self.style_layers = self.scale_image(style_image)
+        self.beta = beta
+        self.alpha = alpha
+
         @staticmethod
         def scale_image(image):
             """
