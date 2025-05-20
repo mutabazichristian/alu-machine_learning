@@ -5,7 +5,6 @@ Class NST that performs tasts for neural style transfer
 """
 import numpy as np
 import tensorflow as tf
-from tensorflow.python.keras.engine import input_layer
 
 
 class NST:
@@ -98,3 +97,22 @@ class NST:
         rescaled = resized / 255
         rescaled = tf.clip_by_value(rescaled, 0, 1)
         return rescaled
+
+    @staticmethod
+    def gram_matrix(input_layer):
+        """
+        Method that calcuates gram matrices
+        args:
+            input_layer: tf.Tensor instance or
+                tf.variable of shape (1, h, w, c)
+
+        returns:
+            tf.Tensor of shape (1, c, c)
+        """
+
+        if type(input_layer) is not tf.Tensor or (
+            type(input_layer) is not tf.Variable
+            or len(input_layer.shape) != 4
+            or input_layer.shape[0] != 1
+        ):
+            raise TypeError("input_layer must be a tensor of rank 4")
